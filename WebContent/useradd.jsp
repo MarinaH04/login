@@ -11,14 +11,17 @@
 Hello World!
 <%
 
- String databaseName="student_database";
- String url="jdbc:mysql://localhost:3306/" +databaseName;
- String username="root";
- String password="Lhtlil@004";
- try {
+
+ try {	
+	 String user = request.getParameter("user");
+	 String email = request.getParameter("email");
+	 String pass = request.getParameter("pass");
 	 	Class.forName("com.mysql.jdbc.Driver");
 		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/student_database", "root", "Lhtlil@004");
 		System.out.println("Database was Connected");
+		PreparedStatement ps = connection.prepareStatement("INSERT INTO `student` (`username`, `email`, `password`) VALUES ('"+user+"','"+email+"','"+pass+"');");
+		ps.executeUpdate();
+		System.out.print("Data inserted");
  }
  catch (Exception e){
 	 System.out.print(e);

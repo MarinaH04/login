@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 
 import java.sql.SQLException;
 
+import com.mysql.jdbc.PreparedStatement;
+
 
 
 public class ConnectingDB {
@@ -16,17 +18,22 @@ public class ConnectingDB {
 	static String password="Lhtlil@004";
 
 	
-	public static void getConnection() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+	public Connection getConnection() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
 		connection = DriverManager.getConnection(url, username, password);
-//		PreparedStatement ps = connection.prepareStatement("INSERT INTO `student`.`student` (`name`) VALUES ('michael clark');");
-//		int status = ps.executeUpdate();
+
 		
 		if(connection!=null) {
 			System.out.println("Database was Connected");
 		
 	}
-
+		return connection;
+	}
+	
+	public void RegisterUser(String user, String Email, String pass) throws SQLException {
+		PreparedStatement ps = (PreparedStatement) connection.prepareStatement("INSERT INTO `student` (`username`, `email`, `password`) VALUES ('"+user+"','"+Email+"','"+pass+"');");
+		ps.executeUpdate();
+		
 	}
 
 }

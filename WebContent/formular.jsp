@@ -28,8 +28,8 @@
 					<p class="h4 mb-4">Sign in</p>
 
 
-					<input type="email" id="defaultLoginFormEmail"
-						class="form-control mb-4" name = "email" placeholder="E-mail"> 
+					<input type="text" id="defaultLoginFormEmail"
+						class="form-control mb-4" name = "username" placeholder="Username"> 
 					<input type="password" id="defaultLoginFormPassword"
 						class="form-control mb-4" name = "password" placeholder="Password">
 
@@ -71,7 +71,7 @@
 
 				</form>
 
-				<form class="text-center p-5 formular form2" action="add" method="post">
+				<form class="text-center p-5 formular form2" action="useradd.jsp" method="post">
 
 					<p class="h4 mb-4">Register</p>
 
