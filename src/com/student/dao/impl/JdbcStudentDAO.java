@@ -38,6 +38,68 @@ public class JdbcStudentDAO implements StudentDAO {
 		}
 	}
 
+	public void updated(Student student, int i) {
+		String sql1 = "UPDATE student SET email = ? where studentID = ?"+i;
+		Connection conn1 = null;
+		try {
+			conn1 = dataSource.getConnection();
+			PreparedStatement ps1 = conn1.prepareStatement(sql1);
+			
+			ps1.setString(1, student.getEmail());
+			ps1.setInt(2, i);
+			ps1.executeUpdate();
+			System.out.println("did it");
+		}
+		catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+		finally {
+			if(conn1!= null) {
+				try{conn1.close();}
+			 catch (SQLException e) {}
+			}
+		}
+	}
+	
+	
+	public Student login(Student student, String user, String pass) {
+		String sql = "SELECT username, password FROM student WHERE username = ?";
+		Connection conn = null;
+		String user1 = null;
+		String pass1 = null;
+		try {
+			conn = dataSource.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ps.setString(1, student.getUsername());
+			ResultSet rs = ps.executeQuery();
+
+			System.out.println(student.getUsername());
+			while (rs.next()) {
+				if (rs.getString("username").equals(user)) {
+					user1 = rs.getString("username");
+					pass1 = rs.getString("password");
+				}
+			}
+			if (user1 != null) {
+				if (pass1.equals(pass)) {
+					System.out.println("done");
+					student = new Student(rs.getString("username"), null, rs.getString("password"));
+				} else {
+					System.out.println("parola incorecta");
+					student = null;
+				}
+
+			} else {
+				System.out.println("username inexistent");
+				student = null;
+			}
+
+		}
+		catch(SQLException e) {}
+		return student;
+		
+	}
 	
 	public Student findByStudentId(int studID) {
 		String sql = "SELECT * FROM student WHERE studentID = ?";
@@ -74,5 +136,7 @@ public class JdbcStudentDAO implements StudentDAO {
 		}
 		
 	}
+
+
 
 }
