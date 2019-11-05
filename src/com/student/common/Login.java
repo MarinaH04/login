@@ -27,11 +27,22 @@ public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOExc
 		Student student = new Student();
 		student.setUsername(username);
 		student.setPassword(password);
+		String email = (studentDAO.findByStudentUser(student, username)).getEmail();
 		if(studentDAO.login(student, username, password)!=null){
 		
 		 session.setAttribute("username",username);  
+		 session.setAttribute("password", password);
+		 session.setAttribute("email", email);
 		res.sendRedirect("logged.jsp");}
 		else {res.sendRedirect("formular.jsp");}
+}
+public static void main(String[] args) {
+//	ApplicationContext context = new ClassPathXmlApplicationContext("Spring-Module.xml");
+//	StudentDAO studentDAO =  (StudentDAO) context.getBean("studentDAO");
+//	Student student = new Student();
+//	System.out.println(studentDAO.findByStudentUser(student, "Marina"));
+//	
+//	System.out.println((studentDAO.findByStudentUser(student, "Marina")).getEmail());
 }
 
 }

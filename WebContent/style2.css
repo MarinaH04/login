@@ -11,9 +11,12 @@ body {
 	height: 20vh;
 	font-size: 26px;
 	border: 2px solid rgb(191, 150, 104);
+	text-align: center;
 }
 
 .editing p {
+	position: relative;
+	top:30%;
 	color: white;
 	padding: 20px;
 }
@@ -22,8 +25,12 @@ body {
 	cursor: pointer;
 	text-decoration: underline;
 }
+#afisare {
+	color: black;
+}
 
 .formular_edit {
+	display: none;
 	width: 90%;
 	margin: 0 auto;
 	background-color: rgba(117, 89, 129, 0.7);
@@ -38,6 +45,9 @@ body {
 .formular_edit p {
 	color: white;
 	font-size: 28px;
+	text-align: center;
+}
+input[type=text], input[type=email], input[type=password]{
 	text-align: center;
 }
 
@@ -62,3 +72,7 @@ input[type=submit]{
 	background-color: rgb(117, 89, 129);
 	padding: 14px;
 }
+.formular_logout {
+	display: none;
+}
+
