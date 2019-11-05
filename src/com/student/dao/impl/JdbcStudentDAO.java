@@ -38,15 +38,15 @@ public class JdbcStudentDAO implements StudentDAO {
 		}
 	}
 
-	public void updated(Student student, int i) {
-		String sql1 = "UPDATE student SET email = ? where studentID = ?"+i;
+	public void updated(Student student, String user) {
+		String sql1 = "UPDATE student SET email = ? where username = ?";
 		Connection conn1 = null;
 		try {
 			conn1 = dataSource.getConnection();
 			PreparedStatement ps1 = conn1.prepareStatement(sql1);
 			
 			ps1.setString(1, student.getEmail());
-			ps1.setInt(2, i);
+			ps1.setString(2, user);
 			ps1.executeUpdate();
 			System.out.println("did it");
 		}
@@ -68,7 +68,7 @@ public class JdbcStudentDAO implements StudentDAO {
 		Connection conn = null;
 		String user1 = null;
 		String pass1 = null;
-		
+
 		try {
 			conn = dataSource.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
@@ -81,7 +81,7 @@ public class JdbcStudentDAO implements StudentDAO {
 				if (rs.getString("username").equals(user)) {
 					user1 = rs.getString("username");
 					pass1 = rs.getString("password");
-					
+
 				}
 			}
 			if (user1 != null) {
@@ -98,10 +98,10 @@ public class JdbcStudentDAO implements StudentDAO {
 				student = null;
 			}
 
+		} catch (SQLException e) {
 		}
-		catch(SQLException e) {}
 		return student;
-		
+
 	}
 	
 	public Student findByStudentUser(Student student, String user) {
@@ -139,7 +139,19 @@ public class JdbcStudentDAO implements StudentDAO {
 		}
 		
 	}
+	
+	public void deleted(Student student, String user) {
+		String sql = "DELETE FROM student where username=?";
 
+		Connection conn = null;
 
+		try {
+			conn = dataSource.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, user);
+			ps.executeUpdate();
+		} catch (Exception e) {
+		}
 
+	}
 }

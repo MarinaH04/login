@@ -56,18 +56,24 @@ String email = (String)session.getAttribute("email");
 	<div class="row">
 		<div class="col-md-4"></div>
 		<div class="col-md-4 mt-5" id="afisare">
-			<form action="#" class="formular_edit">
+			<form action="update" class="formular_edit" method="post">
 			<p>Edit your account</p>
 			<hr>
-				<span><img src="images/user.png"></span><input type="text" class="formtext" value=<%=user %>>
-				<span><img src="images/envelope.png"></span><input type="email" class="formtext" value=<%=email %>>
-				<span><img src="images/key.png"></span><input type="password" class="formtext" value=<%=pass %>>
+				<span><img src="images/user.png"></span><input type="text" class="formtext" name="userup" value=<%=user %>>
+				<span><img src="images/envelope.png"></span><input type="email" class="formtext" name="emailup" value=<%=email %>>
+				<span><img src="images/key.png"></span><input type="password" class="formtext" name="passup" value=<%=pass %>>
 				<input type="submit">
 			</form>
 			
 			<form action="logout" class="formular_logout" method="post">
 				<input type="submit" value="Log out">
 			</form>
+			
+			<form action="delete" class="formular_delete" method="post">
+				<label>Esti sigur ca vrei sa stergi contul?</label>
+				<input type="submit" value="DELETE">
+			</form>
+			
 		</div>
 		<div class="col-md-4"></div>
 	</div>

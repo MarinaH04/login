@@ -76,3 +76,7 @@ input[type=submit]{
 	display: none;
 }
 
+.formular_delete {
+	display: none;
+}
+
